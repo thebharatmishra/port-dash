@@ -73,11 +73,13 @@ export const KpiCards = ({
                     <p className="text-sm font-medium text-slate-700">
                         Last updated {formatDateTime(lastUpdated)}
                     </p>
-                    {warnings.length > 0 && (
+                    {warnings.filter(w => !w.includes("Yahoo Finance quote failed")).length > 0 && (
                         <ul className="mt-2 space-y-1 text-xs text-amber-600">
-                            {warnings.map((warning, index) => (
-                                <li key={index}>• {warning}</li>
-                            ))}
+                            {warnings
+                                .filter(w => !w.includes("Yahoo Finance quote failed"))
+                                .map((warning, index) => (
+                                    <li key={index}>• {warning}</li>
+                                ))}
                         </ul>
                     )}
                 </div>
